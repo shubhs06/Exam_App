@@ -24,39 +24,43 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/exams"
-            element={
-              <PrivateRoute>
-                <ExamList />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/exam/:examId"
-            element={
-              <PrivateRoute>
-                <Exam />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/result/:examId"
-            element={
-              <PrivateRoute>
-                <Result />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <AuthProvider>
+      <ExamProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route
+                path="/exams"
+                element={
+                  <PrivateRoute>
+                    <ExamList />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/exam/:examId"
+                element={
+                  <PrivateRoute>
+                    <Exam />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/result/:examId"
+                element={
+                  <PrivateRoute>
+                    <Result />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </Router>
+        </ThemeProvider>
+      </ExamProvider>
+    </AuthProvider>
   );
 }
 
